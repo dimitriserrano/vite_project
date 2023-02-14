@@ -1,34 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [newTodo, setNewTodo] = useState('')
+  const [ToDoList] = useState([])
+
+  const handleChange = (e) => {
+    setNewTodo(e.target.value)
+  }
+
+  const insert = () => {
+    ToDoList.push(newTodo)
+    setNewTodo('')
+  }
+
 
   return (
-    <div className="App">
+    <div>
+      <h1>ToDoList</h1>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+        <p>Requêtes</p>
+        <label htmlFor="wish"></label>
+        <input 
+          type="text" 
+          id="wish" 
+          name="wish"
+          value={newTodo}
+          onChange={handleChange}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <p></p>
+      <button onClick={() => insert()}>Valider</button>
+      {ToDoList.map(e => <div>{e}</div>)}
     </div>
   )
 }
 
-export default App
+export default App;
